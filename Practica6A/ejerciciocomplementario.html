@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de reserva de viajes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        fieldset {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Página de reserva de viajes</title>
+</head>
+<body>
+<h1>Página de reserva de viajes</h1>
+<form>
+<!-- ================== DATOS PERSONALES ================== -->
+<fieldset>
+<legend><strong>Datos personales</strong></legend>
+<label for="nombre">Nombre completo:</label><br>
+<input type="text" id="nombre" name="nombre" required><br><br>
+<label for="correo">Correo electrónico:</label><br>
+<input type="email" id="correo" name="correo"
+                  placeholder="example@email.com" required><br><br>
+<label for="telefono">Teléfono:</label><br>
+<input type="tel" id="telefono" name="telefono" required><br><br>
+<label for="acompanantes">Número de acompañantes:</label><br>
+<input type="number" id="acompanantes" name="acompanantes"
+                  min="1" max="5" step="1" required><br><br>
+</fieldset>
+<br>
+<!-- ================== DATOS DEL VIAJE ================== -->
+<fieldset>
+<legend><strong>Datos del viaje</strong></legend>
+<label for="origen">Lugar de origen:</label><br>
+<input type="text" id="origen" name="origen"
+                  value="San Salvador" readonly><br><br>
+<label for="destino">Lugar de destino:</label><br>
+<select id="destino" name="destino" required>
+<option value="">Seleccione un destino</option>
+<option value="Lauterbrunnen">Lauterbrunnen</option>
+<option value="Florencia">Florencia</option>
+<option value="Barcelona">Barcelona</option>
+<option value="Venecia">Venecia</option>
+</select><br><br>
+<label for="salida">Fecha de salida:</label><br>
+<input type="date" id="salida" name="salida" required><br><br>
+<label for="regreso">Fecha de regreso:</label><br>
+<input type="date" id="regreso" name="regreso" required><br><br>
+</fieldset>
+<br>
+<input type="submit" value="Reservar viaje">
+</form>
+</body>
+</html>
+</body>
+</html>
