@@ -52,9 +52,11 @@ z-index: 1000;
 
 display: flex;
 
-flex-direction: column;
+flex-direction: row;
 
 align-items: center;
+
+justify-content: space-evenly;
 
 gap: 10px;
 
@@ -80,6 +82,8 @@ gap: 20px;
 
 flex-wrap: wrap;
 
+flex-direction: row;
+
 }
 
 nav a {
@@ -96,6 +100,7 @@ transition: 0.3s;
 
 font-weight: 600;
 
+
 }
 
 nav a:hover {
@@ -104,6 +109,12 @@ background-color: white;
 
 color: var(--acento);
 
+
+}
+
+.menu{
+    flex-direction: row;
+    display: flex;
 }
 
 main {
@@ -264,11 +275,15 @@ transform: scale(1.05);
 
 display: flex;
 
-flex-direction: column;
+flex-direction: row;
+
+flex-wrap: wrap;
 
 align-items: center;
 
-gap: 15px;
+gap: 10px;
+
+justify-content: center;
 
 }
 
@@ -276,11 +291,15 @@ gap: 15px;
 
 display: flex;
 
+flex-direction: row;
+
 flex-wrap: wrap;
 
 justify-content: center;
 
-gap: 15px;
+gap: 10px;
+
+align-content: center;
 
 }
 
