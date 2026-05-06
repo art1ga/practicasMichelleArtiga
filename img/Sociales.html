@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congreso de Filadelfia - App Educativa</title>
+<style>
+:root{
+--bg:#f4ecd8;
+--card:#ffffff;
+--primary:#6b4f3b;
+--text:#222;
+}
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+background:var(--bg);
+color:var(--text);
+transition:0.3s;
+}
+.dark{
+--bg:#121212;
+--card:#1e1e1e;
+--text:#eee;
+}
+header{
+background:var(--primary);
+color:white;
+padding:15px;
+text-align:center;
+font-size:22px;
+}
+nav{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+background:#3d2f25;
+}
+nav button{
+padding:12px;
+border:none;
+background:none;
+color:white;
+cursor:pointer;
+font-size:15px;
+}
+nav button:hover{
+background:#5a4634;
+}
+section{
+display:none;
+padding:20px;
+animation:fade .4s;
+}
+.active{
+display:block;
+}
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+.card{
+background:var(--card);
+padding:20px;
+border-radius:12px;
+margin:auto;
+max-width:950px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+.memory-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:20px;
+}
+.memory{
+background:#6b4f3b;
+color:white;
+height:90px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+border-radius:8px;
+font-weight:bold;
+font-size:18px;
+}
+.hidden{
+background:#444;
+}
+.timeline{
+border-left:4px solid #6b4f3b;
+padding-left:20px;
+margin-top:20px;
+}
+.timeline div{
+margin-bottom:20px;
+}
+.timeline h4{
+margin:0;
+color:#6b4f3b;
+}
+canvas{
+max-width:100%;
+}
+#certCanvas{
+width:100%;
+border:3px solid #6b4f3b;
+border-radius:10px;
+background:#fff8e7;
+}
+button{
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#6b4f3b;
+color:white;
+}
+</style>
+</head>
+<body>
+<header>
+📜 Congreso de Filadelfia (1787)
+</header>
+<nav>
+<button onclick="show('info')">📚 Info</button>
+<button onclick="show('quiz')">🧠 Quiz</button>
+<button onclick="show('game')">🎮 Juego</button>
+<button onclick="show('result')">📊 Resultados</button>
+<button onclick="show('timeline')">🕰️ Línea del tiempo</button>
+<button onclick="show('form')">📋 Formulario</button>
+<button onclick="toggleDark()">🌙</button>
+</nav>
+<!-- INFO -->
+<section id="info" class="active">
+<div class="card">
+<h2>Contexto histórico</h2>
+<p>
+El Congreso de Filadelfia de 1787 fue uno de los acontecimientos más importantes
+en la historia de los Estados Unidos. Según Beeman (2010), este congreso se reunió
+debido a las debilidades de los Artículos de la Confederación.
+</p>
+<p>
+Middlekauff (2007) explica que después de la independencia de las trece colonias,
+los Estados Unidos enfrentaron dificultades económicas y falta de autoridad central.
+</p>
+<p>
+Uno de los hechos más importantes antes del Congreso fue la Rebelión de Shays,
+la cual demostró la debilidad del gobierno.
+</p>
+<p>
+Inicialmente, los delegados querían reformar el sistema, pero luego decidieron crear
+una nueva Constitución.
+</p>
+<p>
+Participaron figuras importantes como George Washington,
+Benjamin Franklin y James Madison.
+</p>
+<p>
+El Compromiso de Connecticut resolvió el problema de representación entre estados.
+</p>
+<p>
+La Constitución estableció tres poderes:
+ejecutivo, legislativo y judicial.
+</p>
+<p>
+La Constitución estadounidense influyó en muchos países y se convirtió en un modelo democrático.
+</p>
+<h3>Bibliografía</h3>
+<p>
+- Middlekauff, R. (2007). <i>La causa de la libertad: la Revolución Americana, 1763-1789</i>.
+</p>
+<p>
+- Beeman, R. (2010). <i>La creación de la Constitución de los Estados Unidos, 1776-1787</i>.
+</p>
+<p>
+- Maier, P. (2011). <i>Ratificación: El pueblo debate la Constitución, 1787-1788</i>.
+</p>
+<p>
+- Hernández Sánchez-Barba, M. (1996). <i>Historia de los Estados Unidos</i>.
+</p>
+</div>
+</section>
+<!-- QUIZ -->
+<section id="quiz">
+<div class="card">
+<h2>Quiz interactivo</h2>
+<iframe
+src="https://docs.google.com/forms/d/e/1FAIpQLSfH_a3YoXU3Yfk313kYm5xO2tRzqaLqdu8ieSib24meAUB-9w/viewform?embedded=true"
+width="100%"
+height="700"
+frameborder="0"
+marginheight="0"
+marginwidth="0">
+Cargando…
+</iframe>
+</div>
+</section>
+<!-- JUEGO -->
+<section id="game">
+<div class="card">
+<h2>Juego de memoria</h2>
+<p>Encuentra las parejas relacionadas con el Congreso de Filadelfia.</p>
+<div class="memory-grid" id="memory"></div>
+<p id="gameMsg"></p>
+</div>
+</section>
+<!-- RESULTADOS -->
+<section id="result">
+<div class="card">
+<h2>Importancia histórica</h2>
+<canvas id="chart" width="400" height="200"></canvas>
+<p>
+El Congreso de Filadelfia permitió crear una Constitución sólida y un sistema político estable.
+Su impacto fue tan grande que influyó en constituciones de muchos países alrededor del mundo.
+</p>
+</div>
+</section>
+<!-- CERTIFICADO -->
+<section id="certificate">
+<div class="card">
+<h2>🏆 Certificado</h2>
+<canvas id="certCanvas" width="700" height="350"></canvas>
+<br><br>
+<button onclick="downloadCert()">
+Descargar certificado
+</button>
+</div>
+</section>
+<!-- TIMELINE -->
+<section id="timeline">
+<div class="card">
+<h2>Línea del tiempo</h2>
+<div class="timeline">
+<div>
+<h4>1776</h4>
+<p>Independencia de las trece colonias.</p>
+</div>
+<div>
+<h4>1781</h4>
+<p>Entraron en vigencia los Artículos de la Confederación.</p>
+</div>
+<div>
+<h4>1786</h4>
+<p>Ocurrió la Rebelión de Shays.</p>
+</div>
+<div>
+<h4>1787</h4>
+<p>Se realizó el Congreso de Filadelfia.</p>
+</div>
+<div>
+<h4>1788</h4>
+<p>La Constitución fue ratificada.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FORM -->
+<section id="form">
+<div class="card">
+<h2>Formulario</h2>
+<iframe
+src="https://docs.google.com/forms/d/e/1FAIpQLSfH_a3YoXU3Yfk313kYm5xO2tRzqaLqdu8ieSib24meAUB-9w/viewform?embedded=true"
+width="100%"
+height="700"
+frameborder="0"
+marginheight="0"
+marginwidth="0">
+Cargando…
+</iframe>
+</div>
+</section>
+<script>
+// NAVEGACIÓN
+function show(id){
+document.querySelectorAll("section")
+.forEach(s=>s.classList.remove("active"));
+document.getElementById(id)
+.classList.add("active");
+}
+// MODO OSCURO
+function toggleDark(){
+document.body.classList.toggle("dark");
+}
+// GRÁFICA
+const chart = document.getElementById("chart");
+let ctx = chart.getContext("2d");
+ctx.fillStyle = "green";
+ctx.fillRect(50,50,80,150);
+ctx.fillStyle = "brown";
+ctx.fillRect(180,90,80,110);
+ctx.fillStyle = "black";
+ctx.font = "16px Arial";
+ctx.fillText("Impacto",55,30);
+ctx.fillText("Influencia",175,70);
+// CONFETTI
+function confetti(){
+for(let i=0;i<60;i++){
+let d = document.createElement("div");
+d.style.position = "fixed";
+d.style.width = "8px";
+d.style.height = "8px";
+d.style.background = "gold";
+d.style.top = Math.random()*100+"%";
+d.style.left = Math.random()*100+"%";
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),2000);
+}
+}
+// CERTIFICADO
+const certCanvas = document.getElementById("certCanvas");
+const certCtx = certCanvas.getContext("2d");
+function generateCertificate(){
+certCtx.fillStyle = "#fff8e7";
+certCtx.fillRect(0,0,700,350);
+certCtx.strokeStyle = "#6b4f3b";
+certCtx.lineWidth = 8;
+certCtx.strokeRect(10,10,680,330);
+certCtx.fillStyle = "#6b4f3b";
+certCtx.font = "38px Georgia";
+certCtx.fillText("Certificado de Logro",180,80);
+certCtx.font = "24px Arial";
+certCtx.fillText(
+"Por completar el juego del Congreso de Filadelfia",
+120,
+150
+);
+certCtx.font = "30px Georgia";
+certCtx.fillText("🎖️ Excelente trabajo 🎖️",190,230);
+certCtx.font = "18px Arial";
+certCtx.fillText(
+"Historia de los Estados Unidos - 1787",
+210,
+300
+);
+}
+function downloadCert(){
+let a = document.createElement("a");
+a.download = "certificado.png";
+a.href = certCanvas.toDataURL();
+a.click();
+}
+// JUEGO MEMORIA
+let items = [
+"1787","1787",
+"Filadelfia","Filadelfia",
+"Constitución","Constitución",
+"Washington","Washington"
+];
+items.sort(()=>0.5-Math.random());
+let mem = document.getElementById("memory");
+let first = null;
+let matches = 0;
+let lock = false;
+items.forEach(val=>{
+let div = document.createElement("div");
+div.className = "memory hidden";
+div.dataset.val = val;
+div.innerText = "?";
+div.onclick = function(){
+if(lock || this === first) return;
+this.innerText = this.dataset.val;
+this.classList.remove("hidden");
+if(!first){
+first = this;
+}else{
+lock = true;
+if(first.dataset.val !== this.dataset.val){
+setTimeout(()=>{
+this.innerText = "?";
+first.innerText = "?";
+this.classList.add("hidden");
+first.classList.add("hidden");
+first = null;
+lock = false;
+},500);
+}else{
+matches++;
+first = null;
+lock = false;
+if(matches === 4){
+confetti();
+document.getElementById("gameMsg").innerText =
+"🎉 ¡Juego completado!";
+generateCertificate();
+show("certificate");
+}
+}
+}
+};
+mem.appendChild(div);
+});
+</script>
+<!-- BOTÓN EN EL NAV -->
+<button onclick="show('map')">🗺️ Mapa</button>
+
+<!-- MAPA -->
+<section id="map">
+<div class="card">
+<h2>🗺️ Las 13 colonias y Filadelfia</h2>
+<p>
+Filadelfia fue la ciudad donde se reunieron los delegados
+para redactar la Constitución de los Estados Unidos en 1787.
+</p>
+<div class="map-container">
+<img 
+src="Colonias.png"
+alt="Mapa de las 13 colonias"
+class="map-img">
+<!-- Punto de Filadelfia -->
+<div id="philaPoint"></div>
+<!-- Etiqueta -->
+<div id="philaLabel">
+📍 Filadelfia
+</div>
+</div>
+<div class="card" style="margin-top:20px;">
+<h3>Importancia de Filadelfia</h3>
+<p>
+Filadelfia fue una de las ciudades más importantes durante la formación
+de los Estados Unidos. Allí se reunieron los representantes de las trece colonias
+para debatir y redactar la Constitución estadounidense.
+</p>
+<p>
+En esta ciudad también se firmó la Declaración de Independencia,
+lo que la convirtió en un símbolo de libertad y democracia.
+</p>
+</div>
+</div>
+</section>
+
+<!-- CSS DEL MAPA -->
+<style>
+.map-container{
+position:relative;
+max-width:850px;
+margin:auto;
+margin-top:20px;
+}
+.map-img{
+width:100%;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+/* Punto rojo */
+#philaPoint{
+position:absolute;
+top:38%;
+left:78%;
+width:18px;
+height:18px;
+background:red;
+border-radius:50%;
+animation:pulse 1.2s infinite;
+box-shadow:0 0 10px red;
+}
+/* Etiqueta */
+#philaLabel{
+position:absolute;
+top:33%;
+left:81%;
+background:#6b4f3b;
+color:white;
+padding:6px 12px;
+border-radius:8px;
+font-size:14px;
+font-weight:bold;
+box-shadow:0 3px 10px rgba(0,0,0,0.2);
+}
+/* Animación */
+@keyframes pulse{
+0%{
+transform:scale(1);
+opacity:1;
+}
+50%{
+transform:scale(1.4);
+opacity:.7;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+/* Responsive */
+@media(max-width:700px){
+#philaPoint{
+top:37%;
+left:76%;
+width:14px;
+height:14px;
+}
+#philaLabel{
+font-size:12px;
+left:79%;
+}
+}
+</style>
+</body>
+</html>
